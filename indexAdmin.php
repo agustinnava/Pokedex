@@ -1,6 +1,11 @@
 <?php
 require_once 'archivosphp/buscador.php';
+session_start();
 
+if (!$_SESSION['logeado']) {
+    header('location:index.php');
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,18 +25,14 @@ require_once 'archivosphp/buscador.php';
         <img src="imagenes/Pikachu-Emoji-PNG.png" width="200px"><img>
         <img src="imagenes/pokemon-logo.png" width="250px" style="margin-left: 22em;"><img>
 
-        <form action="archivosphp/validar.php" method="POST" enctype="multipart/form-data" class="form-head">
-            <input type="text" name="user" placeholder="Usuario">
-            <input type="password" name="password" placeholder="Contraseña">
-            <button type="submit" name="enviar">Sign in</button>
-        </form>
+        <a href = "archivosphp/logout.php" tite = "Logout">Logout</a>
     </div>
 </header>
 
 <main>
     <form action="archivosphp/buscador.php" method="POST" enctype="multipart/form-data" class="form-search">
         <input type="text" name="search" placeholder="Ingrese el nombre, tipo o número de pokemon">
-        <button type="submit">¿Quién es este pokemon?</button>
+        <button type="submit" name="buscador">¿Quién es este pokemon?</button>
     </form>
     <table class="tabla">
         <thead>
@@ -40,9 +41,9 @@ require_once 'archivosphp/buscador.php';
             <th>Tipo</th>
             <th>Numero</th>
             <th>Nombre</th>
+            <th>Acciones</th>
         </tr>
         </thead>
-        <!-- PHP foreach (Crud::listarResultados() as $fila) -->
         <tbody>
 
         <tr>
@@ -50,7 +51,23 @@ require_once 'archivosphp/buscador.php';
             <td><img src="imagenes/Agua_Pokemon.png" ></td>
             <td>1</td>
             <td><a class="detalle" href="detalle.php">Vaporeon</a></td>
+            <td>
+                <a href="modificar.php" style="background-color: #2DA9FF">Modificar</a>
+                <a href="eliminar.php" style="background-color: #D90D32">Eliminar</a>
+            </td>
         </tr>
+
+         <!--      <tr>
+            <?php $buscador = $_POST['search']; foreach (Buscador::listarResultadosFiltrados($buscador) as $fila) {  ?>
+            <td><img src="imagenes/ <?php $fila[imagen];?>" ></td>
+            <td><img src="imagenes/<?php $fila[tipo];?>" ></td>
+            <td><?php $fila[numero];?></td>
+            <td><a class="detalle" href="detalle.php"><?php $fila[nombre];?></a></td>
+            <td>
+                <a href="modificar.php?numero=<?php $fila[numero];?>" style="background-color: #2DA9FF">Modificar</a>
+                <a href="eliminar.php?numero=<?php $fila[numero];}?>" style="background-color: #D90D32">Eliminar</a>
+            </td>
+        </tr>-->
         </tbody>
     </table>
 
@@ -67,60 +84,3 @@ require_once 'archivosphp/buscador.php';
         crossorigin="anonymous"></script>
 </body>
 </html>
-
-<!--<html>
-
-
-<body>
-<h1>POKEDEX</h1>
-
-<div> USUARIO ADMIN </div>
-
-<form action="archivosphp/buscador.php" method="POST" enctype="multipart/form-data">
-	<input type="text" name="search" placeholder="Ingrese el nombre, tipo o número de pokemon">
-	<input type="submit" name="buscar">
-</form>
-
-<table>
-	<tr>
-		<td>
-			Imagen
-		</td>
-		<td>
-			Tipo
-		</td>
-		<td>
-			Numero
-		</td>
-		<td>
-			Nombre
-		</td>
-		<td>
-			Acciones
-		</td>
-	</tr>
-<?php foreach (Crud::listarResultados() as $fila) ?>
-	<tr>
-			<td>
-				<?php echo $fila[0]; ?>
-			</td>
-			<td>
-				<?php echo $fila[1]; ?>
-			</td>
-			<td>
-				<?php echo $fila[2]; ?>
-			</td>
-			<td>
-				<?php echo $fila[3];?>
-			</td>	
-			<td>
-				<a href="archivosphp/edit.php?numero=$fila[0]&action=modificar" type="buttom"> Modificar </a>
-				<a href="archivosphp/edit.php?numero=$fila[0]&action=delete" type="buttom"> Baja </a>
-			</td>
-	</tr>
-	<tr> 
-		<td><a href="nuevoPokemon.php" type="buttom">Nuevo poKemon </a> </td>
-	</tr>
-</table>
-</body>
-</html>-->

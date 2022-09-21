@@ -1,0 +1,142 @@
+.colores{
+    color: #D90D32;
+    color: #2DA9FF;
+    color: #F6E12F;
+    color: #4dad5b;
+    color: #242424;
+    color: #DEDDDD;
+    color: #F2F2F2;
+}
+
+body{
+    font-family: sans-serif;
+    box-sizing: border-box;
+    color: #242424;
+    background: #fff url("../imagenes/container_bg.png");
+}
+
+header {
+    background-color: #D90D32;
+}
+
+
+a{
+    font-size: 20px;
+    border-radius: 20px;
+    background-color: #2DA9FF;
+    color: #DEDDDD;
+    padding: 10px;
+    margin: 5px;
+}
+
+.new{
+    font-size: 20px;
+    padding: 10px 500px;
+    width: 100%;
+    background-color: #242424;
+    color: #DEDDDD;
+    border-radius: 20px;
+}
+
+.new:hover, a:hover{
+    color: #DEDDDD;
+    text-decoration: none;
+}
+
+.link{
+    margin: 3em 0em;
+    text-align: center;
+    width: 100%;
+}
+
+.head{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    height: 100px;
+}
+
+.form-head{
+    text-align: left;
+    margin: 2em 0em;
+}
+
+.form-head input, button{
+    border: none;
+    text-align: center;
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 20px;
+    margin: 0px 5px;
+}
+
+.form-head input{
+    color: #DEDDDD;
+}
+
+.form-head button{
+    font-size: 15px;
+    padding: 10px 20px;
+    font-weight: bold;
+    background-color: #2DA9FF;
+}
+
+.form-search{
+    padding: 2em 0em;
+    text-align: center;
+}
+
+.form-search input, button{
+    border: none;
+    font-size: 25px;
+    padding: 10px;
+}
+
+.form-search button{
+    font-weight: bold;
+    border-radius: 0px 20px 20px 0px;
+    background-color: #2DA9FF;
+}
+
+.form-search input{
+    width: 70%;
+    border-radius: 20px 0px 0px 20px;
+    background-color: #DEDDDD;
+}
+
+table {
+    border: solid 10px #DEDDDD;
+    font-family: sans-serif;
+    margin: auto;
+    width: 80%;
+    background-color: #242424;
+}
+
+.detalle{
+    font-size: 25px;
+    background-color: #242424;
+    color: #DEDDDD;
+}
+
+th, td {
+    border-collapse: collapse;
+}
+
+td {
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    color: #DEDDDD;
+    padding: 5px;
+}
+
+td img{
+    width: 30%;
+}
+
+th {
+    padding: 0px 80px;
+    text-align: center;
+    background-color: #F6E12F;
+    font-size: 30px;
+}

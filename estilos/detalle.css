@@ -1,0 +1,53 @@
+body{
+    font-family: sans-serif;
+    box-sizing: border-box;
+    color: #242424;
+    background: #424242 url("../imagenes/body_bg.png");
+}
+
+header {
+    background-color: #D90D32
+}
+
+main{
+    height: 850px;
+    margin: 0em 14em;
+    background: #fff url("../imagenes/container_bg.png");
+}
+
+h1{
+    text-align: center;
+}
+
+p{
+    margin-top: 1em;
+    font-size: 17px;
+    font-family: monospace;
+    line-height: 150%;
+}
+
+.head{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    height: 100px;
+}
+
+.container{
+    height: 850px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    max-width: 960px;
+    padding: 5em 6em;
+    background: transparent url("../imagenes/content_bg.png") left top;
+}
+
+.pokemon{
+    margin-right: 2em;
+    background-color: #F2F2F2;
+}
+
+.tipo{
+    text-align: center;
+}
