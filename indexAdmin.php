@@ -52,8 +52,8 @@ if (!$_SESSION['logeado']) {
             <td>1</td>
             <td><a class="detalle" href="detalle.php">Vaporeon</a></td>
             <td>
-                <a href="modificar.php" style="background-color: #2DA9FF">Modificar</a>
-                <a href="eliminar.php" style="background-color: #D90D32">Eliminar</a>
+                <a href="modificar.php?numero=1" style="background-color: #2DA9FF">Modificar</a>
+                <a href="eliminar.php?numero=1" style="background-color: #D90D32">Eliminar</a>
             </td>
         </tr>
 

@@ -1,5 +1,5 @@
 <?php
-//require_once 'conexion.php';
+$numero = $_GET['numero'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,13 +21,11 @@
 <main>
     <section class="container">
         <h1>Datos Pokemon</h1>
-        <form action="grabar_modificacion.php" method="POST" enctype="multipart/form-data">
+        <form action="grabar_modificacion.php?numero=<?php $numero?>" method="POST" enctype="multipart/form-data">
 
             <div><img src="imagenes/1200px-Vaporeon.png" width="300px"></div>
 
             <div>
-                <label for="numero">Numero</label>
-                <input type="number" name="numero" placeholder="1">
 
                 <label for="imagen">Imagen</label>
                 <input type="file" name="imagen" accept=".jpg, .jpeg">
@@ -42,7 +40,7 @@
 
             <label for="descripcion">Descripcion</label>
             <textarea name="descripcion" style="width: 100%;"></textarea>
-            <button type="submit">Actualizar</button>
+            <button type="submit" name="actualizar">Actualizar</button>
             </div>
         </form>
     </section>

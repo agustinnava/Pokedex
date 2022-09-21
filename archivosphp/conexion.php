@@ -24,7 +24,7 @@ class Conexion{
     }
 
     public function execute ($sql) {
-        $this->conexion->query($sql);
+       return $this->conexion->query($sql);
     }
 
     public function query ($sql){
