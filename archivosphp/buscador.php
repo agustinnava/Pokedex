@@ -1,11 +1,5 @@
 <?php
 require_once 'conexion.php';
-
-$buscador = $_POST['search'];
-$aBuscar = $_POST['buscador'];
-
-
-
 class Buscador{
 
     private $db;
@@ -18,9 +12,9 @@ class Buscador{
 
         $db = new Conexion();
 
-        $qry = "SELECT p.nombre, p.descripcion, t.tipo, i.imagen FROM pokemon p LEFT JOIN imagen i ON p.imagen = i.id 
-    LEFT JOIN tipo t ON p.tipo = t.id WHERE p.numero LIKE '%" . $buscador .  "%' OR t.tipo LIKE '%" . $buscador .  "%' 
-    OR p.nombre LIKE '%" . $buscador .  "%'";
+        $qry = "SELECT p.numero, p.nombre, p.descripcion, t.tipo, i.imagen FROM pokemon p LEFT JOIN imagen i ON p.imagen = i.id 
+        LEFT JOIN tipo t ON p.tipo = t.id WHERE p.numero LIKE '%" . $buscador .  "%' OR t.tipo LIKE '%" . $buscador .  "%' 
+        OR p.nombre LIKE '%" . $buscador .  "%'";
 
         return $resultados = $db->query($qry);
 
@@ -49,7 +43,7 @@ class Buscador{
             }
 
         }*/
-}
+    }
 
 }
 

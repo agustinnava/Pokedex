@@ -30,7 +30,7 @@ if (!$_SESSION['logeado']) {
 </header>
 
 <main>
-    <form action="archivosphp/buscador.php" method="POST" enctype="multipart/form-data" class="form-search">
+    <form action="indexAdmin.php" method="POST" enctype="multipart/form-data" class="form-search">
         <input type="text" name="search" placeholder="Ingrese el nombre, tipo o número de pokemon">
         <button type="submit" name="buscador">¿Quién es este pokemon?</button>
     </form>
@@ -46,7 +46,7 @@ if (!$_SESSION['logeado']) {
         </thead>
         <tbody>
 
-        <tr>
+        <!-- <tr>
             <td><img src="imagenes/1200px-Vaporeon.png" ></td>
             <td><img src="imagenes/Agua_Pokemon.png" ></td>
             <td>1</td>
@@ -55,19 +55,37 @@ if (!$_SESSION['logeado']) {
                 <a href="modificar.php?numero=1" style="background-color: #2DA9FF">Modificar</a>
                 <a href="eliminar.php?numero=1" style="background-color: #D90D32">Eliminar</a>
             </td>
-        </tr>
+        </tr> -->
 
-         <!--      <tr>
-            <?php $buscador = $_POST['search']; foreach (Buscador::listarResultadosFiltrados($buscador) as $fila) {  ?>
-            <td><img src="imagenes/ <?php $fila[imagen];?>" ></td>
-            <td><img src="imagenes/<?php $fila[tipo];?>" ></td>
-            <td><?php $fila[numero];?></td>
-            <td><a class="detalle" href="detalle.php"><?php $fila[nombre];?></a></td>
-            <td>
-                <a href="modificar.php?numero=<?php $fila[numero];?>" style="background-color: #2DA9FF">Modificar</a>
-                <a href="eliminar.php?numero=<?php $fila[numero];}?>" style="background-color: #D90D32">Eliminar</a>
-            </td>
-        </tr>-->
+        
+            <?php
+            $buscador = '';
+            if(isset($_POST['search']) && isset($_POST['buscador'])){
+                $buscador = $_POST['search'];
+                $aBuscar = $_POST['buscador'];
+            }
+
+            foreach (Buscador::listarResultadosFiltrados($buscador) as $fila) {  ?>
+                <tr>
+                    <td>
+                        <img src="imagenes/<?php echo $fila['imagen'];?>" >
+                    </td>
+                    <td>
+                        <img src="imagenes/<?php echo $fila['tipo'].'_Pokemon.png';?>" >
+                    </td>
+                    <td>
+                        <?php echo $fila['numero'];?>
+                    </td>
+                    <td>
+                        <a class="detalle" href="detalle.php"><?php echo $fila['nombre'];?></a>
+                    </td>
+                    <td>
+                        <a href="modificar.php?numero=<?php echo $fila['numero'];?>" style="background-color: #2DA9FF">Modificar</a>
+                        <a href="eliminar.php?numero=<?php echo $fila['numero'];?>" style="background-color: #D90D32">Eliminar</a>
+                    </td>
+                </tr>
+            <?php }?>
+
         </tbody>
     </table>
 
