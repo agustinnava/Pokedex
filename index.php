@@ -29,9 +29,9 @@ require_once 'archivosphp/buscador.php';
 </header>
 
 <main>
-    <form action="archivosphp/buscador.php" method="POST" enctype="multipart/form-data" class="form-search">
+    <form action="index.php" method="POST" enctype="multipart/form-data" class="form-search">
         <input type="text" name="search" placeholder="Ingrese el nombre, tipo o número de pokemon">
-        <button type="submit">¿Quién es este pokemon?</button>
+        <button type="submit" name="buscador">¿Quién es este pokemon?</button>
     </form>
     <table class="tabla">
         <thead>
@@ -44,13 +44,37 @@ require_once 'archivosphp/buscador.php';
         </thead>
         <!-- PHP foreach (Crud::listarResultados() as $fila) -->
         <tbody>
+            <!-- <tr>
+                <td><img src="imagenes/1200px-Vaporeon.png" ></td>
+                <td><img src="imagenes/Agua_Pokemon.png" ></td>
+                <td>1</td>
+                <td><a class="detalle" href="detalle.php">Vaporeon</a></td>
+            </tr> -->
 
-        <tr>
-            <td><img src="imagenes/1200px-Vaporeon.png" ></td>
-            <td><img src="imagenes/Agua_Pokemon.png" ></td>
-            <td>1</td>
-            <td><a class="detalle" href="detalle.php">Vaporeon</a></td>
-        </tr>
+        <?php
+            $buscador = '';
+            if(isset($_POST['search']) && isset($_POST['buscador'])){
+                $buscador = $_POST['search'];
+                $aBuscar = $_POST['buscador'];
+            }
+
+            foreach (Buscador::listarResultadosFiltrados($buscador) as $fila) {  ?>
+                <tr>
+                    <td>
+                        <img src="imagenes/<?php echo $fila['imagen'];?>" >
+                    </td>
+                    <td>
+                        <img src="imagenes/<?php echo $fila['tipo'].'_Pokemon.png';?>" >
+                    </td>
+                    <td>
+                        <?php echo $fila['numero'];?>
+                    </td>
+                    <td>
+                        <a class="detalle" href="detalle.php"><?php echo $fila['nombre'];?></a>
+                    </td>
+                </tr>
+            <?php }?>
+
         </tbody>
     </table>
 
