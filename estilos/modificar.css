@@ -9,6 +9,10 @@ header {
     background-color: #D90D32
 }
 
+main{
+    padding: 5em;
+}
+
 .head{
     display: flex;
     flex-wrap: nowrap;
@@ -16,26 +20,38 @@ header {
     height: 100px;
 }
 
+.pokemon{
+    margin-bottom: 1em;
+    background-color: #F2F2F2;
+}
+
+h1{
+    background-color: #ffffff;
+    border: double 10px #242424;
+}
+
 .head a{
     margin: auto;
 }
 
 .container{
+    border: double 20px #242424;
+    border-radius: 2em;
     max-width: 720px;
     padding: 2em;
-    height: 850px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+    text-align: center;
     background: #fff url("../imagenes/container_bg.png");
 }
 
 label{
+    display: block;
     font-size: 30px;
     margin: 10px 15px;
 }
 
 input{
+    width: 80%;
+    border-radius: 20px;
     text-align: center;
 }
 
@@ -53,4 +69,15 @@ form{
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
+}
+
+textarea{
+    height: 200px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+select{
+    padding: 5px 20px;
+    border-radius: 20px;
 }

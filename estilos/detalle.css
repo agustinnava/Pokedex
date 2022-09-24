@@ -10,37 +10,49 @@ header {
 }
 
 main{
-    height: 850px;
-    margin: 0em 14em;
+    height: 650px;
+    margin: 5em 20em;
     background: #fff url("../imagenes/container_bg.png");
 }
 
-h1{
+h1, h2{
+    margin: 0px 10px;
+    font-style: normal;
+    font-family: monospace;
+    font-size: 50px;
+    display: inline;
     text-align: center;
 }
 
+h2{
+    color: #616161;
+    display: inline;
+}
+
+h3{
+    text-align: left;
+    font-size: 30px;
+    font-family: sans-serif;
+    margin: 10px 0px;
+}
+
+
 p{
-    margin-top: 1em;
     font-size: 17px;
-    font-family: monospace;
+    margin-top: 1em;
     line-height: 150%;
 }
 
 .head{
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
+    text-align: center;
     height: 100px;
 }
 
 .container{
-    height: 850px;
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
+    height: 650px;
     max-width: 960px;
     padding: 5em 6em;
-    background: transparent url("../imagenes/content_bg.png") left top;
+
 }
 
 .pokemon{
@@ -48,6 +60,23 @@ p{
     background-color: #F2F2F2;
 }
 
-.tipo{
+.centro{
+    border: double 10px;
+    border-radius: 20px;
     text-align: center;
+    background-color: white;
+}
+
+.flex{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    margin-top: 2em;
+}
+
+.info{
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px 30px;
+    border: double 5px;
 }

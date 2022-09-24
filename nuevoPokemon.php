@@ -1,4 +1,11 @@
 <?php
+session_start();
+if (!$_SESSION['logeado']) {
+    header('location:index.php');
+    exit();
+}
+require_once("conexion.php");
+require_once("funciones.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,25 +28,34 @@
     <section class="edit">
         <article class="container">
             <h1>Registra un Pokemon</h1>
-            <form action="archivosphp/registrar-pokemon.php" method="POST" enctype="multipart/form-data">
 
-                <div><img src="imagenes/quien_es_ese_pokemon__who_s_that_poke___by_shikomt_by_shikomt_dbf1jrd-fullview.jpg" width="450px"></div>
+            <form action="registrar-pokemon.php" method="POST" enctype="multipart/form-data">
+                <div>
+                    <label for="nombre">Nombre</label>
+                    <input type="text" name="nombre" required>
+
+                    <label for="imagen">Imagen</label>
+                    <input type="file" name="imagen" required>
+
+                    <label for="tipo">Tipo</label>
+                    <select name="tipo" required>
+                        <?php $listaTipos = funciones::listarTipos();
+                        foreach ($listaTipos as $tipo){
+                            echo "<option value='$tipo[id]'>$tipo[tipo]</option>";
+                        }
+                        ?>
+                    </select>
+
+                    <label for="descripcion">Descripcion</label>
+                    <textarea name="descripcion" width="100%" height="200px" required></textarea>
+
+                    <button type="submit">Registrar</button>
+                </div>
 
                 <div>
-                <label for="id">Numero</label>
-                <input type="number" name="numero">
+                    <img src="imagenes/Opera%20Instantánea_2022-09-22_002239_pokemon.fandom.com.png"
+                         width="500px" height="500px"></div>
 
-                <label for="nombre">Nombre</label>
-                <input type="text" name="nombre">
-
-                <label for="imagen">Imagen</label>
-                <input type="file" name="imagen">
-
-                <label for="descripcion">Descripcion</label>
-                <textarea name="descripcion" width="100%" height="200px"></textarea>
-
-                <button type="submit">Registrar</button>
-                </div>
             </form>
         </article>
     </section>

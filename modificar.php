@@ -1,4 +1,12 @@
 <?php
+session_start();
+if (!$_SESSION['logeado']) {
+    header('location:index.php');
+    exit();
+}
+require_once("conexion.php");
+require_once("funciones.php");
+
 $numero = $_GET['numero'];
 ?>
 <!DOCTYPE html>
@@ -21,30 +29,49 @@ $numero = $_GET['numero'];
 <main>
     <section class="container">
         <h1>Datos Pokemon</h1>
-        <form action="grabar_modificacion.php?numero=<?php $numero?>" method="POST" enctype="multipart/form-data">
+        <form action='grabar-modificacion.php' method="POST" enctype="multipart/form-data">
 
-            <div><img src="imagenes/1200px-Vaporeon.png" width="300px"></div>
+            <?php
+            $datos = funciones::datosPokemon($numero);
+
+            $imagen = funciones::getImagen($datos['imagen']);
+            $tipoImagen = funciones::getTipo($datos['tipo']);
+            ?>
 
             <div>
+                <img src='imagenes/<?php echo $imagen ?>' class='pokemon' width='300px'>
+                <img src='imagenes/<?php echo $tipoImagen ?>' width='100px'>
+            </div>
 
-                <label for="imagen">Imagen</label>
-                <input type="file" name="imagen" accept=".jpg, .jpeg">
+            <div>
+                <label for='numero'>Numero</label>
+                <input type='number' name='numero' value='<?php echo $datos['numero'] ?>' readonly>
 
+                <label for='imagen'>Imagen</label>
+                <input type='file' name='imagen' accept='.jpg, .jpeg, .png'>
 
-                <label for="nombre">Nombre</label>
-                <input type="text" name="nombre" placeholder="Vaporeon">
+                <label for='nombre'>Nombre</label>
+                <input type='text' name='nombre' value='<?php echo $datos['nombre'] ?>'>
 
-                <label for="tipo">Tipo</label>
-                <img src="imagenes/Agua_Pokemon.png" width="100px">
+                <label for='tipo'>Tipo</label>
+                <select name='tipo'>
+                    <?php $listaTipos = funciones::listarTipos();
+                    foreach ($listaTipos as $tipo){
+                        if ($tipo['id'] == $datos['tipo']){
+                            echo "<option value='$tipo[id]' selected>$tipo[tipo]</option>";
+                        } else {
+                            echo "<option value='$tipo[id]'>$tipo[tipo]</option>";
+                        }
+                    }?>
+                </select>
 
+                <label for='descripcion'>Descripcion</label>
+                <textarea name='descripcion' style='width: 100%;'> <?php echo $datos['descripcion']?></textarea>
 
-            <label for="descripcion">Descripcion</label>
-            <textarea name="descripcion" style="width: 100%;"></textarea>
-            <button type="submit" name="actualizar">Actualizar</button>
+                <button type='submit' name='actualizar'>Actualizar</button>
             </div>
         </form>
     </section>
 </main>
-
 </body>
 </html>

@@ -24,12 +24,12 @@ class Conexion{
     }
 
     public function execute ($sql) {
-        $this->conexion->query($sql);
+       return $this->conexion->query($sql);
     }
 
     public function query ($sql){
         $result = $this->conexion->query($sql);
-        return $result->fetch_all();
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     public function __destruct(){

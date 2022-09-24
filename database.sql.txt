@@ -20,33 +20,21 @@ CREATE TABLE `pokedex`.`tipo` (
   descripcion VARCHAR(1000) NOT NULL,
   PRIMARY KEY (numero));
 
- ALTER TABLE pokemon ADD CONSTRAINT FOREIGN KEY (tipo) REFERENCES Tipo (id);
- ALTER TABLE pokemon ADD CONSTRAINT FOREIGN KEY (imagen) REFERENCES imagen (id);
- 
- insert into imagen (imagen) VALUES ('imagen.png');
- insert into tipo (tipo) VALUES ('Agua');
- insert into pokemon (imagen, tipo, nombre, descripcion) VALUES ('1', '1', 'pikachu', 'es amarillo');
- 
-insert into imagen (imagen) VALUES ('imagen2.jpg');
-insert into tipo (tipo) VALUES ('Tierra');
- insert into pokemon (imagen, tipo, nombre, descripcion) VALUES ('2', '2', 'Bulbasaur', 'es una tortuga');
- 
-insert into imagen (imagen) VALUES ('imagen3.png');
-insert into tipo (tipo) VALUES ('Fuego');
- insert into pokemon (imagen, tipo, nombre, descripcion) VALUES ('3', '3', 'charmander', 'vuela');
- 
- SELECT * from pokemon;
- 
  CREATE TABLE usuarios (
   id INT NOT NULL AUTO_INCREMENT,
   user VARCHAR(45) NOT NULL,
   password VARCHAR(45) NOT NULL,
   PRIMARY KEY (id));
-  
+
+ALTER TABLE tipo ADD imagen VARCHAR(40);
+
+ALTER TABLE pokemon ADD CONSTRAINT FOREIGN KEY (tipo) REFERENCES Tipo (id);
+ALTER TABLE pokemon ADD CONSTRAINT FOREIGN KEY (imagen) REFERENCES imagen (id);
+
+
   INSERT INTO usuarios (user, password) VALUES ('admin', '1234');
   INSERT INTO usuarios (user, password) VALUES ('matias', '1234');
   INSERT INTO usuarios (user, password) VALUES ('damian', '1234');
   INSERT INTO usuarios (user, password) VALUES ('agustin', '1234');
   INSERT INTO usuarios (user, password) VALUES ('arami', '1234');
-  
-  ALTER TABLE tipo ADD imagen VARCHAR(40);
+

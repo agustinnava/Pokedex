@@ -7,6 +7,10 @@ body{
 
 h1{
     text-align: center;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 20px;
+    border: double 5px #242424;
 }
 
 header {
@@ -25,6 +29,8 @@ header {
 }
 
 .container{
+    border: double 10px;
+    border-radius: 20px;
     padding: 2em;
     background: #fff url("../imagenes/container_bg.png");
 }
@@ -34,11 +40,17 @@ form{
     text-align: center;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
 }
 
+form div{
+    background-color: #ffffff;
+
+}
+
 input{
+    padding: 5px;
     margin: auto;
     text-align: center;
     border-radius: 20px;
@@ -46,12 +58,12 @@ input{
 }
 
 textarea{
+    padding: 10px;
     border-radius: 20px;
     height: 200px;
 }
 
 div{
-    margin: 0em 2em;
     display: flex;
     flex-wrap: nowrap;
     flex-direction: column;
@@ -63,7 +75,15 @@ label{
 }
 
 .edit{
-    padding: 8em 0em;
+    padding: 3em 0em;
+}
+
+select{
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    padding: 10px;
+    border-radius: 20px;
 }
 
 button{
@@ -72,6 +92,12 @@ button{
     font-size: 25px;
     padding: 10px;
     border-radius: 20px;
-    background-color: #2DA9FF;
-    border-style: none;
+    color: #242424;
+    background-color: #ffffff;
+    border: double 5px #242424;
+}
+
+button:hover{
+    background-color: #242424;
+    color: white;
 }

@@ -1,6 +1,6 @@
 <?php
-require_once 'archivosphp/buscador.php';
-
+require_once ("conexion.php");
+require_once ("funciones.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,21 +17,23 @@ require_once 'archivosphp/buscador.php';
 <body>
 <header>
     <div class="head">
-        <img src="imagenes/Pikachu-Emoji-PNG.png" width="200px"><img>
-        <img src="imagenes/pokemon-logo.png" width="250px" style="margin-left: 22em;"><img>
+        <div><img src="imagenes/Pikachu-Emoji-PNG.png" width="100px"></div>
+        <div><img src="imagenes/pokemon-logo.png" width="250px"></div>
 
-        <form action="archivosphp/validar.php" method="POST" enctype="multipart/form-data" class="form-head">
-            <input type="text" name="user" placeholder="Usuario">
-            <input type="password" name="password" placeholder="Contraseña">
-            <button type="submit" name="enviar">Sign in</button>
-        </form>
+        <div>
+            <form action="validar.php" method="POST" enctype="application/x-www-form-urlencoded" class="form-head">
+                <input type="text" name="user" placeholder="Usuario">
+                <input type="password" name="password" placeholder="Contraseña">
+                <button type="submit" name="enviar">Sign in</button>
+            </form>
+        </div>
     </div>
 </header>
 
 <main>
     <form action="index.php" method="POST" enctype="multipart/form-data" class="form-search">
         <input type="text" name="search" placeholder="Ingrese el nombre, tipo o número de pokemon">
-        <button type="submit" name="buscador">¿Quién es este pokemon?</button>
+        <button type="submit" name="buscar">¿Quién es este pokemon?</button>
     </form>
     <table class="tabla">
         <thead>
@@ -42,43 +44,41 @@ require_once 'archivosphp/buscador.php';
             <th>Nombre</th>
         </tr>
         </thead>
-        <!-- PHP foreach (Crud::listarResultados() as $fila) -->
         <tbody>
-            <!-- <tr>
-                <td><img src="imagenes/1200px-Vaporeon.png" ></td>
-                <td><img src="imagenes/Agua_Pokemon.png" ></td>
-                <td>1</td>
-                <td><a class="detalle" href="detalle.php">Vaporeon</a></td>
-            </tr> -->
-
-        <?php
+        <!-- Agregar filtros (los filtros deben estar contenidos en un metodo que reciba por parametro el valor
+        y si este es nulo, no recibe nada, que se muestre toda la lista de pokemon) -->
+        <?php if(empty($_POST['search'])){
             $buscador = '';
-            if(isset($_POST['search']) && isset($_POST['buscador'])){
-                $buscador = $_POST['search'];
-                $aBuscar = $_POST['buscador'];
-            }
+            foreach (funciones::listarPokemon() as $fila) {
+                $imagen = funciones::getImagen($fila['imagen']);
+                $tipo = funciones::getTipo($fila['tipo']);
 
-            foreach (Buscador::listarResultadosFiltrados($buscador) as $fila) {  ?>
-                <tr>
-                    <td>
-                        <img src="imagenes/<?php echo $fila['imagen'];?>" >
-                    </td>
-                    <td>
-                        <img src="imagenes/<?php echo $fila['tipo'].'_Pokemon.png';?>" >
-                    </td>
-                    <td>
-                        <?php echo $fila['numero'];?>
-                    </td>
-                    <td>
-                        <a class="detalle" href="detalle.php"><?php echo $fila['nombre'];?></a>
-                    </td>
-                </tr>
-            <?php }?>
+                echo "<tr>
+                    <td><img src='imagenes/$imagen'></td>
+                    <td><img src='imagenes/$tipo'></td>
+                    <td>$fila[numero]</td>
+                    <td><a class='detalle' href='detalle.php?nombre=$fila[nombre]'>$fila[nombre]</a></td>
+                </tr>";
+            }
+        }else{
+            $buscador = $_POST['search'];
+            foreach (funciones::listarResultadosFiltrados($buscador) as $fila) {
+                $imagen = $fila['imagen'];
+                $tipo = $fila['tipo'];
+                $nombre = $fila['nombre'];
+                $numero = $fila['numero'];
+                echo "<tr>
+                    <td><img src='imagenes/$imagen'></td>
+                    <td><img src='imagenes/$tipo'></td>
+                    <td>$numero</td>
+                    <td><a class='detalle' href='detalle.php?nombre=$nombre'>$nombre</a></td>
+                </tr>";
+            }
+        }
+        ?>
 
         </tbody>
     </table>
-
-    <div class="link"><a class="new" href="nuevoPokemon.php">Nuevo pokemon</a></div>
 </main>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -91,60 +91,3 @@ require_once 'archivosphp/buscador.php';
         crossorigin="anonymous"></script>
 </body>
 </html>
-
-<!--<html>
-
-
-<body>
-<h1>POKEDEX</h1>
-
-<div> USUARIO ADMIN </div>
-
-<form action="archivosphp/buscador.php" method="POST" enctype="multipart/form-data">
-	<input type="text" name="search" placeholder="Ingrese el nombre, tipo o número de pokemon">
-	<input type="submit" name="buscar">
-</form>
-
-<table>
-	<tr>
-		<td>
-			Imagen
-		</td>
-		<td>
-			Tipo
-		</td>
-		<td>
-			Numero
-		</td>
-		<td>
-			Nombre
-		</td>
-		<td>
-			Acciones
-		</td>
-	</tr>
-<?php foreach (Crud::listarResultados() as $fila) ?>
-	<tr>
-			<td>
-				<?php echo $fila[0]; ?>
-			</td>
-			<td>
-				<?php echo $fila[1]; ?>
-			</td>
-			<td>
-				<?php echo $fila[2]; ?>
-			</td>
-			<td>
-				<?php echo $fila[3];?>
-			</td>	
-			<td>
-				<a href="archivosphp/edit.php?numero=$fila[0]&action=modificar" type="buttom"> Modificar </a>
-				<a href="archivosphp/edit.php?numero=$fila[0]&action=delete" type="buttom"> Baja </a>
-			</td>
-	</tr>
-	<tr> 
-		<td><a href="nuevoPokemon.php" type="buttom">Nuevo poKemon </a> </td>
-	</tr>
-</table>
-</body>
-</html>-->
