@@ -17,17 +17,23 @@ $numero = $_GET['numero'];
     <!--Etiquetas para visualizar cambios de css en tiempo real-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="estilos/modificar.css?v=<?php echo time(); ?>"/>
     <script src="/js/functions.js?v=<?php echo time(); ?>"></script>
+    <link rel="stylesheet" href="estilos/nuevoPokemon.css?v=<?php echo time(); ?>"/>
+
 </head>
 <body>
 <header>
-    <div class="head">
-        <a href="indexAdmin.php"><img src="imagenes/pokemon-logo.png" width="250px" style="margin: auto;"><img></a>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-danger navbar-custom">
+        <div class="container-fluid">
+            <div class="navbar-brand ">
+                <a href="indexAdmin.php"><img src="imagenes/pokemon-logo.png" width="250px"><img></a>
+            </div>
+        </div>
+    </nav>
 </header>
 <main>
-    <section class="container">
+    <section class="edit">
+    <article class="container">
         <h1>Datos Pokemon</h1>
         <form action='grabar-modificacion.php' method="POST" enctype="multipart/form-data">
 
@@ -71,6 +77,7 @@ $numero = $_GET['numero'];
                 <button type='submit' name='actualizar'>Actualizar</button>
             </div>
         </form>
+    </article>
     </section>
 </main>
 </body>

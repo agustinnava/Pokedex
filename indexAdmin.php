@@ -11,50 +11,73 @@ require_once("funciones.php");
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name=”viewport” content=”width=device-width, initial-scale=1.0">
     <title>Inicio</title>
     <!--Etiquetas para visualizar cambios de css en tiempo real-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="estilos/pokedex.css?v=<?php echo time(); ?>"/>
-    <script src="/js/functions.js?v=<?php echo time(); ?>"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+            integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+            integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+            crossorigin="anonymous"></script>
 </head>
 
 <body>
 <header>
-    <div class="head">
-        <div><img src="imagenes/Pikachu-Emoji-PNG.png" width="100px"></div>
-        <div><img src="imagenes/pokemon-logo.png" width="250px"></div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-danger navbar-custom">
+        <div class="container-fluid">
+            <div class="navbar-brand ">
+                <img src="imagenes/pokemon-logo.png" width="250px"><img>
+            </div>
 
-        <div>
-            <p>Admin</p>
-            <a href="logout.php" class="button">Cerrar Sesion</a>
+            <div class="d-flex form-head ml-auto">
+                <p>Admin</p>
+                <form action="logout.php">
+                    <button class="btn-primary" href="logout.php" class="a-custom button">Cerrar Sesion</button>
+                </form>
+            </div>
+
         </div>
-    </div>
+    </nav>
 </header>
 
 <main>
     <form action="indexAdmin.php" method="POST" enctype="multipart/form-data" class="form-search">
         <input type="text" name="search" placeholder="Ingrese el nombre, tipo o número de pokemon">
-        <button type="submit">¿Quién es este pokemon?</button>
+        <button class="btn-primary" type="submit" name="buscar">¿Quién es este pokemon?</button>
     </form>
-    <table class="tabla">
-        <thead>
-        <tr>
-            <th>Imagen</th>
-            <th>Tipo</th>
-            <th>Numero</th>
-            <th>Nombre</th>
-            <th>Acciones</th>
-        </tr>
-        </thead>
+    <div class="table-responsive">
+        <table class="tabla">
+            <thead>
+            <tr>
+                <th>Imagen</th>
+                <th>Tipo</th>
+                <th>Numero</th>
+                <th>Nombre</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
 
+<<<<<<< HEAD
         <tbody>
         <?php if(empty($_POST['search'])){
             foreach (funciones::listarPokemon() as $fila) {
                 $imagen = funciones::getImagen($fila['imagen']);
                 $tipo = funciones::getTipo($fila['tipo']);
+=======
+            <tbody>
+            <!-- aplicar el mismo listar que en el index.php -->
+            <?php if (empty($_POST['search'])) {
+                $buscador = '';
+                foreach (funciones::listarPokemon() as $fila) {
+                    $imagen = funciones::getImagen($fila['imagen']);
+                    $tipo = funciones::getTipo($fila['tipo']);
+>>>>>>> 5e735659f24a6ca89fc3fae2a2df7b21fa0d7dd2
 
-                echo "<tr>
+                    echo "<tr>
                     <td><img src='imagenes/$imagen'></td>
                     <td><img src='imagenes/$tipo'></td>
                     <td>$fila[numero]</td>
@@ -64,6 +87,7 @@ require_once("funciones.php");
                         <a href='eliminar.php?numero=$fila[numero]' style='background-color: #D90D32'>Eliminar</a>
                     </td>
                 </tr>";
+<<<<<<< HEAD
             }
         }else{
             $buscador = $_POST['search'];
@@ -75,6 +99,16 @@ require_once("funciones.php");
                     $imagen = funciones::getImagen($fila['imagen']);
                     $tipo = funciones::getTipo($fila['tipo']);
 
+=======
+                }
+            } else {
+                $buscador = $_POST['search'];
+                foreach (funciones::listarResultadosFiltrados($buscador) as $fila) {
+                    $imagen = $fila['imagen'];
+                    $tipo = $fila['tipo'];
+                    $nombre = $fila['nombre'];
+                    $numero = $fila['numero'];
+>>>>>>> 5e735659f24a6ca89fc3fae2a2df7b21fa0d7dd2
                     echo "<tr>
                     <td><img src='imagenes/$imagen'></td>
                     <td><img src='imagenes/$tipo'></td>
@@ -103,14 +137,18 @@ require_once("funciones.php");
                         <a href='eliminar.php?numero=$numero' style='background-color: #D90D32'>Eliminar</a>
                     </td>
                 </tr>";
+                }
             }
-        }
             ?>
 
-        </tbody>
-    </table>
-
-    <div class="link"><a class="new" href="nuevoPokemon.php">Nuevo pokemon</a></div>
+            </tbody>
+        </table>
+    </div>
+    <div class="container">
+        <div class="link">
+            <a class="new btn btn-primary btn-lg" href="nuevoPokemon.php">Nuevo pokemon</a>
+        </div>
+    </div>
 </main>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

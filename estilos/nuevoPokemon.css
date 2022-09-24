@@ -44,11 +44,6 @@ form{
     align-items: center;
 }
 
-form div{
-    background-color: #ffffff;
-
-}
-
 input{
     padding: 5px;
     margin: auto;

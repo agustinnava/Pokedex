@@ -16,13 +16,18 @@ require_once("funciones.php");
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="estilos/nuevoPokemon.css?v=<?php echo time(); ?>"/>
-    <script src="/js/functions.js?v=<?php echo time(); ?>"></script>
+
 </head>
 <body>
 <header>
-    <div class="head">
-        <a href="indexAdmin.php"><img src="imagenes/pokemon-logo.png" width="250px" style="margin: auto;"><img></a>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-danger navbar-custom">
+        <div class="container-fluid">
+            <div class="navbar-brand ">
+                <a href="indexAdmin.php"><img src="imagenes/pokemon-logo.png" width="250px"><img></a>
+            </div>
+        </div>
+    </nav>
+
 </header>
 <main>
     <section class="edit">
@@ -54,7 +59,8 @@ require_once("funciones.php");
 
                 <div>
                     <img src="imagenes/Opera%20Instantánea_2022-09-22_002239_pokemon.fandom.com.png"
-                         width="500px" height="500px"></div>
+                         width="500px" height="500px">
+                </div>
 
             </form>
         </article>
