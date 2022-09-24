@@ -60,22 +60,11 @@ require_once("funciones.php");
                 <th>Acciones</th>
             </tr>
             </thead>
-
-<<<<<<< HEAD
         <tbody>
         <?php if(empty($_POST['search'])){
             foreach (funciones::listarPokemon() as $fila) {
                 $imagen = funciones::getImagen($fila['imagen']);
                 $tipo = funciones::getTipo($fila['tipo']);
-=======
-            <tbody>
-            <!-- aplicar el mismo listar que en el index.php -->
-            <?php if (empty($_POST['search'])) {
-                $buscador = '';
-                foreach (funciones::listarPokemon() as $fila) {
-                    $imagen = funciones::getImagen($fila['imagen']);
-                    $tipo = funciones::getTipo($fila['tipo']);
->>>>>>> 5e735659f24a6ca89fc3fae2a2df7b21fa0d7dd2
 
                     echo "<tr>
                     <td><img src='imagenes/$imagen'></td>
@@ -87,7 +76,6 @@ require_once("funciones.php");
                         <a href='eliminar.php?numero=$fila[numero]' style='background-color: #D90D32'>Eliminar</a>
                     </td>
                 </tr>";
-<<<<<<< HEAD
             }
         }else{
             $buscador = $_POST['search'];
@@ -99,16 +87,6 @@ require_once("funciones.php");
                     $imagen = funciones::getImagen($fila['imagen']);
                     $tipo = funciones::getTipo($fila['tipo']);
 
-=======
-                }
-            } else {
-                $buscador = $_POST['search'];
-                foreach (funciones::listarResultadosFiltrados($buscador) as $fila) {
-                    $imagen = $fila['imagen'];
-                    $tipo = $fila['tipo'];
-                    $nombre = $fila['nombre'];
-                    $numero = $fila['numero'];
->>>>>>> 5e735659f24a6ca89fc3fae2a2df7b21fa0d7dd2
                     echo "<tr>
                     <td><img src='imagenes/$imagen'></td>
                     <td><img src='imagenes/$tipo'></td>

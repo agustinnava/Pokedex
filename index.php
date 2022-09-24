@@ -48,65 +48,22 @@ require_once("funciones.php");
 </header>
 
 <main>
-<<<<<<< HEAD
     <form action="index.php" method="POST" enctype="multipart/form-data" class="form-search">
         <input type="text" name="search" placeholder="Ingrese el nombre, tipo o número de pokemon">
         <button type="submit" name="buscar">¿Quién es este pokemon?</button>
     </form>
-    <table class="tabla">
-        <thead>
-        <tr>
-            <th>Imagen</th>
-            <th>Tipo</th>
-            <th>Numero</th>
-            <th>Nombre</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php if(empty($_POST['search'])){
-            foreach (funciones::listarPokemon() as $fila) {
-                $imagen = funciones::getImagen($fila['imagen']);
-                $tipo = funciones::getTipo($fila['tipo']);
-=======
-    <div class="container-fluid">
-        <form action="index.php" method="POST" enctype="multipart/form-data" class="form-search">
-            <input type="text" name="search" placeholder="Ingrese el nombre, tipo o número de pokemon">
-            <button class="btn-primary" type="submit" name="buscar">¿Quién es este pokemon?</button>
-        </form>
-        <div class="table-responsive ">
-            <table class="tabla breakpoint-sm">
-                <thead>
-                <tr>
-                    <th>Imagen</th>
-                    <th>Tipo</th>
-                    <th>Numero</th>
-                    <th>Nombre</th>
-                </tr>
-                </thead>
-                <tbody>
-                <!-- Agregar filtros (los filtros deben estar contenidos en un metodo que reciba por parametro el valor
-                y si este es nulo, no recibe nada, que se muestre toda la lista de pokemon) -->
-                <?php if (empty($_POST['search'])) {
-                    $buscador = '';
-                    foreach (funciones::listarPokemon() as $fila) {
-                        $imagen = funciones::getImagen($fila['imagen']);
-                        $tipo = funciones::getTipo($fila['tipo']);
->>>>>>> 5e735659f24a6ca89fc3fae2a2df7b21fa0d7dd2
-
-                        echo "<tr>
-                    <td><img src='imagenes/$imagen'></td>
-                    <td><img src='imagenes/$tipo'></td>
-                    <td>$fila[numero]</td>
-                    <td><a class='detalle' href='detalle.php?nombre=$fila[nombre]'>$fila[nombre]</a></td>
-                </tr>";
-<<<<<<< HEAD
-            }
-        }else{
-            $buscador = $_POST['search'];
-            $filtrados = funciones::listarResultadosFiltrados($buscador);
-
-            if(sizeof($filtrados) == 0){
-                echo "<h5 style='text-align: -webkit-center;'>No se encontraron resultados que coincidan con la búsqueda</h5>";
+    <div class="table-responsive">
+        <table class="tabla breakpoint-sm">
+            <thead>
+            <tr>
+                <th>Imagen</th>
+                <th>Tipo</th>
+                <th>Numero</th>
+                <th>Nombre</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php if(empty($_POST['search'])){
                 foreach (funciones::listarPokemon() as $fila) {
                     $imagen = funciones::getImagen($fila['imagen']);
                     $tipo = funciones::getTipo($fila['tipo']);
@@ -118,39 +75,44 @@ require_once("funciones.php");
                     <td><a class='detalle' href='detalle.php?nombre=$fila[nombre]'>$fila[nombre]</a></td>
                 </tr>";
                 }
-            }
-            foreach ($filtrados as $fila) {
-                $imagen = $fila['imagen'];
-                $tipo = $fila['tipo'];
-                $nombre = $fila['nombre'];
-                $numero = $fila['numero'];
-                echo
-                "<tr>
-=======
-                    }
-                } else {
-                    $buscador = $_POST['search'];
-                    foreach (funciones::listarResultadosFiltrados($buscador) as $fila) {
-                        $imagen = $fila['imagen'];
-                        $tipo = $fila['tipo'];
-                        $nombre = $fila['nombre'];
-                        $numero = $fila['numero'];
+            }else{
+                $buscador = $_POST['search'];
+                $filtrados = funciones::listarResultadosFiltrados($buscador);
+
+                if(sizeof($filtrados) == 0){
+                    echo "<h5 style='text-align: -webkit-center;'>No se encontraron resultados que coincidan con la búsqueda</h5>";
+                    foreach (funciones::listarPokemon() as $fila) {
+                        $imagen = funciones::getImagen($fila['imagen']);
+                        $tipo = funciones::getTipo($fila['tipo']);
+
                         echo "<tr>
->>>>>>> 5e735659f24a6ca89fc3fae2a2df7b21fa0d7dd2
+                    <td><img src='imagenes/$imagen'></td>
+                    <td><img src='imagenes/$tipo'></td>
+                    <td>$fila[numero]</td>
+                    <td><a class='detalle' href='detalle.php?nombre=$fila[nombre]'>$fila[nombre]</a></td>
+                </tr>";
+                    }
+                }
+                foreach ($filtrados as $fila) {
+                    $imagen = $fila['imagen'];
+                    $tipo = $fila['tipo'];
+                    $nombre = $fila['nombre'];
+                    $numero = $fila['numero'];
+                    echo
+                    "<tr>
                     <td><img src='imagenes/$imagen'></td>
                     <td><img src='imagenes/$tipo'></td>
                     <td>$numero</td>
                     <td><a class='detalle' href='detalle.php?nombre=$nombre'>$nombre</a></td>
                 </tr>";
-                    }
                 }
-                ?>
-
-                </tbody>
-            </table>
-        </div>
+            }
+            ?>
+            </tbody>
+        </table>
     </div>
 </main>
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
