@@ -45,10 +45,7 @@ require_once ("funciones.php");
         </tr>
         </thead>
         <tbody>
-        <!-- Agregar filtros (los filtros deben estar contenidos en un metodo que reciba por parametro el valor
-        y si este es nulo, no recibe nada, que se muestre toda la lista de pokemon) -->
         <?php if(empty($_POST['search'])){
-            $buscador = '';
             foreach (funciones::listarPokemon() as $fila) {
                 $imagen = funciones::getImagen($fila['imagen']);
                 $tipo = funciones::getTipo($fila['tipo']);
@@ -62,12 +59,29 @@ require_once ("funciones.php");
             }
         }else{
             $buscador = $_POST['search'];
-            foreach (funciones::listarResultadosFiltrados($buscador) as $fila) {
+            $filtrados = funciones::listarResultadosFiltrados($buscador);
+
+            if(sizeof($filtrados) == 0){
+                echo "<h5 style='text-align: -webkit-center;'>No se encontraron resultados que coincidan con la búsqueda</h5>";
+                foreach (funciones::listarPokemon() as $fila) {
+                    $imagen = funciones::getImagen($fila['imagen']);
+                    $tipo = funciones::getTipo($fila['tipo']);
+
+                    echo "<tr>
+                    <td><img src='imagenes/$imagen'></td>
+                    <td><img src='imagenes/$tipo'></td>
+                    <td>$fila[numero]</td>
+                    <td><a class='detalle' href='detalle.php?nombre=$fila[nombre]'>$fila[nombre]</a></td>
+                </tr>";
+                }
+            }
+            foreach ($filtrados as $fila) {
                 $imagen = $fila['imagen'];
                 $tipo = $fila['tipo'];
                 $nombre = $fila['nombre'];
                 $numero = $fila['numero'];
-                echo "<tr>
+                echo
+                "<tr>
                     <td><img src='imagenes/$imagen'></td>
                     <td><img src='imagenes/$tipo'></td>
                     <td>$numero</td>

@@ -49,9 +49,7 @@ require_once("funciones.php");
         </thead>
 
         <tbody>
-        <!-- aplicar el mismo listar que en el index.php -->
         <?php if(empty($_POST['search'])){
-            $buscador = '';
             foreach (funciones::listarPokemon() as $fila) {
                 $imagen = funciones::getImagen($fila['imagen']);
                 $tipo = funciones::getTipo($fila['tipo']);
@@ -69,12 +67,33 @@ require_once("funciones.php");
             }
         }else{
             $buscador = $_POST['search'];
-            foreach (funciones::listarResultadosFiltrados($buscador) as $fila) {
-                    $imagen = $fila['imagen'];
-                    $tipo = $fila['tipo'];
-                    $nombre = $fila['nombre'];
-                    $numero = $fila['numero'];
+            $filtrados = funciones::listarResultadosFiltrados($buscador);
+
+            if(sizeof($filtrados) == 0){
+                echo "<h5 style='text-align: -webkit-center;'>No se encontraron resultados que coincidan con la búsqueda</h5>";
+                foreach (funciones::listarPokemon() as $fila) {
+                    $imagen = funciones::getImagen($fila['imagen']);
+                    $tipo = funciones::getTipo($fila['tipo']);
+
                     echo "<tr>
+                    <td><img src='imagenes/$imagen'></td>
+                    <td><img src='imagenes/$tipo'></td>
+                    <td>$fila[numero]</td>
+                    <td><a class='detalle' href='detalle.php?nombre=$fila[nombre]'>$fila[nombre]</a></td>
+                    <td>
+                        <a href='modificar.php?numero=$fila[numero]' style='background-color: #2DA9FF'>Modificar</a>
+                        <a href='eliminar.php?numero=$fila[numero]' style='background-color: #D90D32'>Eliminar</a>
+                    </td>
+                </tr>";
+                }
+            }
+            foreach ($filtrados as $fila) {
+                $imagen = $fila['imagen'];
+                $tipo = $fila['tipo'];
+                $nombre = $fila['nombre'];
+                $numero = $fila['numero'];
+                echo
+                "<tr>
                     <td><img src='imagenes/$imagen'></td>
                     <td><img src='imagenes/$tipo'></td>
                     <td>$numero</td>

@@ -17,10 +17,6 @@ class Conexion{
         //CONEXION
         $this->conexion = new mysqli($this->servidor, $this->usuario, $this->clave, $this->base);
 
-        // VERIFCAMOS FALLO DE CONEXION
-       /* if ($this->conexion->connect_errno) {
-            echo "Falló la conexión a MySQL: (" . $this->conexion->connect_errno . ") " . $this->conexion->connect_error;
-        }*/
     }
 
     public function execute ($sql) {

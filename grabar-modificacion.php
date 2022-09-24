@@ -11,6 +11,7 @@ $imagen = $_FILES['imagen']['name'];
 $tipo = $_POST['tipo'];
 $descripcion = $_POST['descripcion'];
 $nombre = $_POST['nombre'];
+$imagenAsubir = '';
 
 $db = new Conexion();
 
@@ -20,11 +21,24 @@ $resultSelect = $db->query($qry);
 
 foreach ($resultSelect as $result) {
 
-    //revisar que se pueda modificar la imagen
     if($imagen != null){
+        //SUBE IMAGEN AL DIRECTORIO
         move_uploaded_file($_FILES['imagen']['tmp_name'], "imagenes/".$imagen);
-        $qry = "UPDATE pokemon SET imagen = '$imagen' WHERE numero = '$numero'";
-        $db->execute($qry);
+        //SUBE IMAGEN A LA BASE DE DATOS
+        $qryInsertImagen = "INSERT INTO imagen (imagen) VALUES ('$imagen')";
+
+        //SI SE PUDO SUBIR
+        if($db->execute($qryInsertImagen)){
+            //LLAMO AL ID DE ESA IMAGEN
+            $qryTraerImagen= "SELECT id FROM imagen WHERE imagen = '$imagen'";
+            $idImagen = $db->query($qryTraerImagen);
+
+            //INGRESO ESE ID COMO NUEVA FK DE IMAGEN EN POKEMON
+            foreach ($idImagen as $imagenAsubir){
+                $qry = "UPDATE pokemon SET imagen = ' $imagenAsubir[id]' WHERE numero = '$numero'";
+                $db->execute($qry);
+            }
+        }
     }
 
     if($tipo != null){
@@ -44,6 +58,5 @@ foreach ($resultSelect as $result) {
 
     header("location: indexAdmin.php");
 }
-
 
 ?>

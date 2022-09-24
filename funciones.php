@@ -74,10 +74,12 @@ class funciones
 
         $db = new Conexion();
 
-        $qry = "SELECT p.numero, p.nombre, p.descripcion, t.tipo, i.imagen FROM pokemon p LEFT JOIN imagen i ON p.imagen = i.id 
+        $qry = "SELECT p.numero, p.nombre, p.descripcion, t.imagen as tipo, i.imagen FROM pokemon p LEFT JOIN imagen i ON p.imagen = i.id 
         LEFT JOIN tipo t ON p.tipo = t.id WHERE p.numero LIKE '%" . $buscador .  "%' OR t.tipo LIKE '%" . $buscador .  "%' 
         OR p.nombre LIKE '%" . $buscador .  "%'";
 
-        return $resultados = $db->query($qry);
+        $resultados = $db->query($qry);
+
+        return $resultados;
     }
 }
