@@ -15,7 +15,7 @@ class Conexion{
         $this->base = 'pokedex';
 
         //CONEXION
-        $this->conexion = new mysqli($this->servidor, $this->usuario, $this->clave, $this->base);
+        $this->conexion = new mysqli($this->servidor, $this->usuario, $this->clave, $this->base, $port = "3307");
 
     }
 

@@ -24,7 +24,6 @@ require_once("funciones.php");
             integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
             crossorigin="anonymous"></script>
 </head>
-
 <body>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-danger navbar-custom">
@@ -36,7 +35,7 @@ require_once("funciones.php");
             <div class="d-flex form-head ml-auto">
                 <p>Admin</p>
                 <form action="logout.php">
-                    <button class="btn-primary" href="logout.php" class="a-custom button">Cerrar Sesion</button>
+                    <button class="btn-primary logout" href="logout.php" class="a-custom button">Cerrar Sesion</button>
                 </form>
             </div>
 

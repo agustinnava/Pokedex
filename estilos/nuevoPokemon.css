@@ -90,9 +90,17 @@ button{
     color: #242424;
     background-color: #ffffff;
     border: double 5px #242424;
+    transition: 0.5s;
 }
 
 button:hover{
+    transform: scale(1,1);
     background-color: #242424;
     color: white;
+}
+
+.pokemon{
+    margin-bottom: 3em;
+    background-color: #F2F2F2;
+    border-radius: 20px;
 }

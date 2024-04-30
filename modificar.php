@@ -45,8 +45,8 @@ $numero = $_GET['numero'];
             ?>
 
             <div>
-                <img src='imagenes/<?php echo $imagen ?>' class='pokemon' width='300px'>
-                <img src='imagenes/<?php echo $tipoImagen ?>' width='100px'>
+                <img src='imagenes/<?php echo $imagen ?>' class='pokemon' width='600px'>
+                <img src='imagenes/<?php echo $tipoImagen ?>' width='200px' style="margin: auto;">
             </div>
 
             <div>
